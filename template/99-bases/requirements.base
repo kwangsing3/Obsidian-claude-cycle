@@ -1,0 +1,55 @@
+filters:
+  and:
+    - type == "requirement"
+    - not:
+        - file.inFolder("90-templates")
+formulas:
+  req_link: file.asLink(title)
+properties:
+  formula.req_link:
+    displayName: 需求
+  req-id:
+    displayName: 編號
+  file.name:
+    displayName: 需求
+  project:
+    displayName: 專案
+  status:
+    displayName: 狀態
+  priority:
+    displayName: 優先
+  target-release:
+    displayName: 目標版本
+views:
+  - type: table
+    name: 全部需求
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - req-id
+      - file.name
+      - project
+      - priority
+      - target-release
+  - type: table
+    name: 待處理
+    filters:
+      not:
+        - status == "done"
+    order:
+      - req-id
+      - file.name
+      - project
+      - priority
+      - status
+  - type: table
+    name: 依專案
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - req-id
+      - file.name
+      - status
+      - priority

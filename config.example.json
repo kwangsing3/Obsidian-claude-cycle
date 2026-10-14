@@ -1,0 +1,16 @@
+{
+  "_comment": "複製成 config.json 後改成你自己的值。install.ps1 會把它裝進 vault 的 .ops/ 下。",
+  "vault": "C:/Users/你的帳號/OneDrive/MyVault",
+  "source_root": "C:/Users/你的帳號/project",
+  "gitlab_api": "https://gitlab.com/api/v4",
+  "gitlab_group": "your-gitlab-group",
+  "github_owner": "your-github-id",
+  "owner_name": "你的名字（會出現在筆記的 owner 欄位與規範文字裡）",
+  "since_days": 30,
+  "schedule_time": "21:00",
+  "container_dirs": [
+    "github",
+    "examples",
+    "sandbox"
+  ]
+}

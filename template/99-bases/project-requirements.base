@@ -1,0 +1,40 @@
+filters:
+  and:
+    - type == "requirement"
+    - file.hasLink(this)
+formulas:
+  req_link: 'file.asLink(title)'
+properties:
+  formula.req_link:
+    displayName: 需求
+  req-id:
+    displayName: 編號
+  status:
+    displayName: 狀態
+  priority:
+    displayName: 優先
+  persona:
+    displayName: 角色
+  support:
+    displayName: 支援度
+views:
+  - type: table
+    name: 本專案需求
+    order:
+      - req-id
+      - formula.req_link
+      - status
+      - priority
+      - support
+    sort:
+      - property: priority
+        direction: DESC
+  - type: table
+    name: 依狀態
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - req-id
+      - formula.req_link
+      - priority

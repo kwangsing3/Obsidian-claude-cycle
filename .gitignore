@@ -1,0 +1,36 @@
+# 個人設定（含真實路徑與群組名）
+config.json
+
+# ───────────────────────────────────────────────────────────
+# 內容資料夾——筆記本體，可能含客戶名稱、同事姓名、內網位址、
+# 合約資訊。一律錨定在根目錄（開頭的 /），才不會誤擋 template/
+# 底下同名的空骨架。
+# ───────────────────────────────────────────────────────────
+/00-inbox/
+/10-projects/
+/20-areas/
+/30-resources/
+/40-archive/
+/50-daily/
+/60-meetings/
+/70-maps/
+/80-attachments/
+/99-bases/*.md
+/❓ 待決事項.md
+/🎯 行動建議.md
+
+# 執行期產物
+.ops/logs/
+.ops/drops/
+.ops/venv/
+.ops/config.json
+.ops/_*.py
+.ops/tmp_*.py
+*.bak
+
+# 一般
+__pycache__/
+*.pyc
+.obsidian/
+.DS_Store
+Thumbs.db

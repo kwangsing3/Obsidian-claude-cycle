@@ -1,0 +1,74 @@
+filters:
+  and:
+    - type == "requirement"
+    - not:
+        - status == "done"
+        - status == "rejected"
+        - file.inFolder("90-templates")
+formulas:
+  todo_link: file.asLink(title)
+properties:
+  formula.todo_link:
+    displayName: 待辦
+  req-id:
+    displayName: 編號
+  project:
+    displayName: 所屬專案
+  status:
+    displayName: 狀態
+  priority:
+    displayName: 優先
+  due:
+    displayName: 期限
+  persona:
+    displayName: 角色
+views:
+  - type: table
+    name: 有期限的
+    filters: due != null
+    order:
+      - due
+      - formula.todo_link
+      - project
+      - priority
+      - status
+  - type: table
+    name: 依專案
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - formula.todo_link
+      - req-id
+      - priority
+      - status
+      - file.basename
+  - type: table
+    name: 依優先序
+    groupBy:
+      property: priority
+      direction: ASC
+    order:
+      - formula.todo_link
+      - project
+      - due
+      - req-id
+      - status
+  - type: table
+    name: 全部待辦
+    order:
+      - req-id
+      - formula.todo_link
+      - project
+      - priority
+      - status
+  - type: cards
+    name: 卡片
+    order:
+      - formula.todo_link
+      - project
+      - priority
+  - type: table
+    name: 檢視
+  - type: table
+    name: 檢視 2

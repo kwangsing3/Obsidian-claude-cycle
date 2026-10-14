@@ -1,0 +1,28 @@
+filters:
+  and:
+    - type == "meeting"
+    - not:
+        - file.inFolder("90-templates")
+properties:
+  file.name:
+    displayName: 會議
+  date:
+    displayName: 日期
+  project:
+    displayName: 專案
+views:
+  - type: table
+    name: 最近會議
+    order:
+      - date
+      - file.name
+      - project
+      - attendees
+  - type: table
+    name: 依專案
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - date
+      - file.name

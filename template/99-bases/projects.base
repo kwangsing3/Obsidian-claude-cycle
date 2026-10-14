@@ -1,0 +1,85 @@
+filters:
+  and:
+    - type == "project"
+    - not:
+        - file.inFolder("40-archive")
+        - file.inFolder("90-templates")
+formulas:
+  proj_link: 'file.asLink(title)'
+properties:
+  formula.proj_link:
+    displayName: 專案名稱
+  file.name:
+    displayName: 檔名
+  kind:
+    displayName: 性質
+  domain:
+    displayName: 領域
+  git-host:
+    displayName: Host
+  git-namespace:
+    displayName: 命名空間
+  git-branch:
+    displayName: 分支
+  status:
+    displayName: 狀態
+  priority:
+    displayName: 優先
+  owner:
+    displayName: 負責人
+  due:
+    displayName: 到期
+  progress:
+    displayName: 進度%
+views:
+  - type: table
+    name: 依 domain 分組
+    groupBy:
+      property: domain
+      direction: ASC
+    order:
+      - formula.proj_link
+      - formula.proj_link
+      - status
+      - priority
+      - last-commit
+  - type: table
+    name: 依狀態
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - formula.proj_link
+      - file.name
+      - domain
+      - priority
+      - owner
+      - due
+      - progress
+  - type: table
+    name: 進行中
+    filters: status == "active"
+    order:
+      - formula.proj_link
+      - file.name
+      - priority
+      - due
+      - progress
+  - type: table
+    name: 依 Git 命名空間
+    groupBy:
+      property: git-namespace
+      direction: ASC
+    order:
+      - formula.proj_link
+      - domain
+      - git-branch
+      - status
+      - last-commit
+  - type: cards
+    name: 卡片牆
+    order:
+      - formula.proj_link
+      - file.name
+      - status
+      - due
