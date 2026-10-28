@@ -273,10 +273,12 @@ vault 的 token 具備寫入權，但**寫入分兩級**：
 | --- | --- | --- |
 | **在 issue 留言** | 每日排程可自動做 | 可逆、不發狀態變更通知，錯了直接更正 |
 | **關閉 issue、改標題／標籤／指派** | **只有 {{OWNER_NAME}} 在對話中確認後** | 會發通知給相關同事，且判定是從 commit 推論的 |
+| **開新 issue** | **只有 {{OWNER_NAME}} 在對話中明確要求時**（排程永遠不得開） | 會通知專案成員；開什麼、寫什麼由 {{OWNER_NAME}} 決定 |
 
 工具是 `.ops/gitlab_write.py`：
 - `comment` — 留言帶 `<!-- obsidian-vault-verify -->` 標記，重跑只更新既有留言不洗版
 - `close` — 必須帶 `--allow-close`，**排程永遠不得帶**
+- `create <project> <title> <md檔>` — 開新 issue；同標題已有 open issue 時回 `EXISTS` 不重開。不設標籤／指派（要設需另外確認）
 
 留言內容一律要附 commit hash、日期與程式碼位置，並在結尾聲明「由自動化產生，不會自行關閉 issue」。
 

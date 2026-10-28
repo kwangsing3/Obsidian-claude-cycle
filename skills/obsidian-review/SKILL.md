@@ -1,6 +1,6 @@
 ---
 name: obsidian-review
-description: 整理 Obsidian vault —— 執行與每日排程完全相同的流程：掃投放檔（信件／Excel／PPT）、處理待決事項、比對 git 與 GitLab、更新需求筆記與心智圖、寫今日筆記。當使用者說「整理筆記」「跑一次整理」「同步 vault」「看一下 vault」或要求手動執行每日流程時使用。
+description: 整理 Obsidian vault —— 執行與每日排程完全相同的流程：掃投放檔（信件／Excel／PPT）、處理待決事項、比對 git 與 GitLab、更新需求筆記與心智圖、寫今日筆記。當使用者說「整理筆記」「跑一次整理」「同步 vault」「看一下 vault」或要求手動執行每日流程時使用。也用於在任何專案「開 GitLab issue／建 issue」（`.ops/gitlab_write.py create`）。
 ---
 
 # Obsidian vault 整理
@@ -32,6 +32,7 @@ venv/Scripts/python.exe gitlab_sync.py          # GitLab 專案／MR／Wiki 同�
 venv/Scripts/python.exe gitlab_issues_to_reqs.py # Issues → 需求筆記
 venv/Scripts/python.exe issue_commit_match.py   # 為 issue 蒐集 commit 證據
 venv/Scripts/python.exe gitlab_write.py comment <project> <iid> <md檔>
+venv/Scripts/python.exe gitlab_write.py create <project> <title> <md檔>  # 開新 issue（僅限對話中被要求時）
 ```
 
 ## 回報語言
@@ -50,7 +51,7 @@ venv/Scripts/python.exe gitlab_write.py comment <project> <iid> <md檔>
 - **不刪除、不覆蓋既有筆記**；要移除一律搬 `40-archive/`，**搬完要刪掉留下的空目錄**
 - **不用萬用字元批次刪除**（2026-08-19 曾因此誤刪整個專案）
 - `{{SOURCE_ROOT}}` 底下**只能讀**
-- **關閉 GitLab issue 需要 {{OWNER_NAME}} 當面確認**；留言可自動做
+- **關閉 GitLab issue 需要 {{OWNER_NAME}} 當面確認**；留言可自動做；**開新 issue 只在 {{OWNER_NAME}} 明確要求時做**（排程不得開）
 - 新建專案**必須有 `## 🧭 來源索引`**，並區分 ①權威／②外部／③推論
 - 不確定的事寫進 `<vault>/❓ 待決事項.md`，不要臆測
 
@@ -60,6 +61,7 @@ venv/Scripts/python.exe gitlab_write.py comment <project> <iid> <md檔>
 
 - 遇到需要判斷的事**可以直接問他**，不必一律丟進待決事項
 - 他明確要求時**可以關閉 issue**（排程不行）
+- 他要求開 issue 時用 `gitlab_write.py create`（任何專案都適用，不只在整理 vault 時）；Windows 下執行前設 `PYTHONIOENCODING=utf-8`
 - 回報要具體：改了哪幾篇、發現什麼、還有什麼卡住
 
 完成後簡短回報，不要把整個流程覆述一遍。
