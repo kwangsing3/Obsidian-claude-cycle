@@ -32,6 +32,8 @@ $allow = @(
 $deny = @(
     # 關閉 issue 需 --allow-close，排程一律封死
     "Bash(*gitlab_write.py close*)",
+    # 開新 issue 只在使用者於對話中要求時做，排程一律封死
+    "Bash(*gitlab_write.py create*)",
     "Bash(rm:*)", "Bash(rmdir:*)", "Bash(del:*)",
     "Bash(git push:*)", "Bash(git commit:*)", "Bash(git reset:*)",
     "Bash(git checkout:*)", "Bash(git clean:*)", "Bash(git rebase:*)",
